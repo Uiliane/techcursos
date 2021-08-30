@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 
 const Styles = StyleSheet.create({
   imageThumbnail: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
     resizeMode: 'contain',
     alignSelf: 'center',
   },

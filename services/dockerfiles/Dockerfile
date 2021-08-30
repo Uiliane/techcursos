@@ -86,7 +86,6 @@ RUN set -ex; \
 # installing python dependencies
 RUN pip install Flask
 RUN pip install mysql-connector-python
-RUN pip install pymongo
 
 # creating the app dir - composer will transfer the app to this folder
 RUN mkdir /servico

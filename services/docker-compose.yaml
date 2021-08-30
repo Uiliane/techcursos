@@ -1,37 +1,66 @@
 version: '3'
 services:
-  courses:
+  cursos:
     image: techcursos
     build: ./dockerfiles
-    hostname: courses
+    hostname: cursos
     expose:
       - '5000'
     volumes:
-      - './course:/servico'
+      - './cursos:/servico'
     command: python3 servico.py
-    networks:
-      coursesnet:
-        ipv4_address: 172.29.1.1
-
-  bancodados:
+    ports:
+      - '8088:5000'
+  favoritos:
+    image: techcursos
+    build: ./dockerfiles
+    hostname: favoritos
+    expose:
+      - '5000'
+    volumes:
+      - './favoritos:/servico'
+    command: python3 servico.py
+    ports:
+      - '8089:5000'
+  avaliacao:
+    image: techcursos
+    build: ./dockerfiles
+    hostname: avaliacao
+    expose:
+      - '5000'
+    volumes:
+      - './avaliacao:/servico'
+    command: python3 servico.py
+    ports:
+      - '8090:5000'
+  cursosiniciados:
+    image: techcursos
+    build: ./dockerfiles
+    hostname: cursosiniciados
+    expose:
+      - '5000'
+    volumes:
+      - './cursosiniciados:/servico'
+    command: python3 servico.py
+    ports:
+      - '8091:5000'
+  comentarios:
+    image: techcursos
+    build: ./dockerfiles
+    hostname: comentarios
+    expose:
+      - '5000'
+    volumes:
+      - './comentarios:/servico'
+    command: python3 servico.py
+    ports:
+      - '8092:5000'
+  bd:
     image: mysql
-    hostname: bancodados
+    hostname: bd
     expose:
       - '3306'
     environment:
       MYSQL_ROOT_PASSWORD: admin
-    networks:
-      coursesnet:
-        ipv4_address: 172.29.1.2
-
-  mongo:
-    image: mongo
     ports:
-      - '27018:27017'
-
-  networks:
-    coursesnet:
-      ipam:
-        driver: default
-        config:
-          - subnet: 172.29.1.0/16
+      - '3307:3306'

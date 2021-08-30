@@ -1,232 +1,47 @@
-import React, {useState} from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, TextInput, View} from 'react-native';
 import Courses from '../courses';
 import Styles from './styles';
 
 const Search = ({navigation, user}) => {
-  const [courses, setCourses] = useState([
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Python',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://th.bing.com/th/id/OIP.K72YuGb7DH_Rzi2GrPXxcgHaFj?w=219&h=180&c=7&o=5&pid=1.7',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-    {
-      title: 'Aprendendo Java',
-      description: 'Descrição',
-      favorite: [{user: 'uilianesilvateixeira@gmail.com', favorite: true}],
-      ratings: [{user: 'uilianesilvateixeira@gmail.com', rating: 3}],
-      comments: [],
-      playlistID: 'PLyqOvdQmGdTSEPnO0DKgHlkXb8x3cyglD',
-      thumbnail:
-        'https://cdn.vox-cdn.com/thumbor/_AobZZDt_RVStktVR7mUZpBkovc=/0x0:640x427/1200x800/filters:focal(0x0:640x427)/cdn.vox-cdn.com/assets/1087137/java_logo_640.jpg',
-      init: {
-        'uilianesilvateixeira@gmail.com': true,
-      },
-    },
-  ]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [itens, setItens] = useState(6);
-  const [data, setData] = useState(courses.slice(0, 6));
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
 
-  const getData = () => {
+  const apiUrl = 'http://127.0.0.1:8088';
+
+  function getData() {
     setLoading(true);
-    setTimeout(() => {
-      setData(courses.slice(0, itens + 6));
-      setItens(itens + 6);
-      setLoading(false);
-    }, 3000);
-  };
+    axios
+      .get(
+        apiUrl +
+          `/cursos/${search !== null ? 1 : page}/${
+            search === null ? '%20' : search
+          }`,
+      )
+      .then(response => {
+        if (search !== null) {
+          setData(response.data);
+        } else {
+          setData(data.concat(response.data));
+        }
+        setPage(page + 1);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.log('Erro get Cursos', error);
+        setLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getData();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <View style={{marginBottom: 120}}>
@@ -235,6 +50,7 @@ const Search = ({navigation, user}) => {
           style={Styles.input}
           onChangeText={value => {
             setSearch(value);
+            getData();
           }}
           value={search}
           placeholderTextColor="white"
@@ -243,18 +59,14 @@ const Search = ({navigation, user}) => {
       </View>
       <FlatList
         data={data}
-        renderItem={item =>
-          item.item.title.includes(search) ? (
-            <Courses navigation={navigation} course={item} user={user} />
-          ) : (
-            <></>
-          )
-        }
+        renderItem={item => (
+          <Courses navigation={navigation} course={item} user={user} />
+        )}
         keyExtractor={(item, index) => index}
         onEndReached={getData}
         onEndReachedThreshold={0.1}
         ListFooterComponent={() =>
-          loading && itens <= courses.length ? (
+          loading ? (
             <View style={{padding: 50}}>
               <ActivityIndicator size={25} color="#004d9d" />
             </View>
